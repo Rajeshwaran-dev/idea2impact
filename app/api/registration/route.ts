@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       skills,
       motivation,
     });
-console.log(process.env.MAIL_PASS,process.env.MAIL_USER,process.env.SMPT_HOST,"============")
+
     // 2️⃣ SMTP Transport
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -48,7 +48,7 @@ console.log(process.env.MAIL_PASS,process.env.MAIL_USER,process.env.SMPT_HOST,"=
     });
 
     // 3️⃣ Send Email
-    await transporter.sendMail({
+    transporter.sendMail({
       from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",

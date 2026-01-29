@@ -10,7 +10,6 @@ declare global {
 }
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
-console.log(process.env.MONGODB_URI ,"monooo")
 if (!MONGODB_URI) {
   throw new Error("❌ MONGODB_URI is not defined");
 }
