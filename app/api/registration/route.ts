@@ -36,28 +36,26 @@ export async function POST(req: Request) {
       motivation,
     });
 
-    sendRegistrationEmail(body)
-   
+    await sendRegistrationEmail(body);
 
     return NextResponse.json(
       { success: true, id: registration._id },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("❌ Registration API Error:", error);
     const errMessage =
-    error instanceof Error ? error.message : "Something went wrong";
+      error instanceof Error ? error.message : "Something went wrong";
     return NextResponse.json(
       {
         success: false,
         message: "Registration failed",
         error: errMessage,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
 
 interface EmailPayload {
   name: string;
@@ -94,11 +92,11 @@ export function sendRegistrationEmail(data: EmailPayload): void {
         },
       });
 
-       transporter.sendMail({
-      from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
-      to: process.env.RECIPIENT_EMAIL,
-      subject: "Idea2Impact 2026 – Registration Successful 🚀",
-      html: `
+      transporter.sendMail({
+        from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
+        to: process.env.RECIPIENT_EMAIL,
+        subject: "Idea2Impact 2026 – Registration Successful 🚀",
+        html: `
        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; border-radius: 12px;">
   <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
     
@@ -228,22 +226,20 @@ export function sendRegistrationEmail(data: EmailPayload): void {
     <!-- Footer -->
     <div style="background: #f8f9fa; padding: 20px 25px; text-align: center; border-top: 3px solid #667eea;">
       <p style="margin: 0; color: #6c757d; font-size: 13px;">
-        Received on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+        Received on ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
       </p>
     </div>
-    
   </div>
 </div>
       `,
-    });
+      });
 
       console.log("✅ Registration email sent");
     } catch (err) {
       console.error(
         "❌ Email send failed:",
-        err instanceof Error ? err.message : err
+        err instanceof Error ? err.message : err,
       );
     }
   })();
 }
-
