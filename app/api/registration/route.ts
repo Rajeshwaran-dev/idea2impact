@@ -39,16 +39,16 @@ export async function POST(req: Request) {
     // 2️⃣ SMTP Transport
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port:587,
-      secure: false, 
+      port: 587,
+      secure: false,
       auth: {
-        user:process.env.MAIL_USER,
-        pass:process.env.MAIL_PASS,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
       },
     });
 
     // 3️⃣ Send Email
-    transporter.sendMail({
+    await transporter.sendMail({
       from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",
@@ -182,7 +182,7 @@ export async function POST(req: Request) {
     <!-- Footer -->
     <div style="background: #f8f9fa; padding: 20px 25px; text-align: center; border-top: 3px solid #667eea;">
       <p style="margin: 0; color: #6c757d; font-size: 13px;">
-        Received on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+        Received on ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
       </p>
     </div>
     
@@ -193,19 +193,19 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       { success: true, id: registration._id },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("❌ Registration API Error:", error);
     const errMessage =
-    error instanceof Error ? error.message : "Something went wrong";
+      error instanceof Error ? error.message : "Something went wrong";
     return NextResponse.json(
       {
         success: false,
         message: "Registration failed",
         error: errMessage,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
