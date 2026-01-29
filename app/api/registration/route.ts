@@ -36,67 +36,23 @@ export async function POST(req: Request) {
       motivation,
     });
 
-    await sendRegistrationEmail(body);
-
-    return NextResponse.json(
-      { success: true, id: registration._id },
-      { status: 200 },
-    );
-  } catch (error) {
-    console.error("❌ Registration API Error:", error);
-    const errMessage =
-      error instanceof Error ? error.message : "Something went wrong";
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Registration failed",
-        error: errMessage,
+    // 2️⃣ SMTP Transport
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port:587,
+      secure: false, 
+      auth: {
+        user:process.env.MAIL_USER,
+        pass:process.env.MAIL_PASS,
       },
-      { status: 500 },
-    );
-  }
-}
+    });
 
-interface EmailPayload {
-  name: string;
-  email: string;
-  phone: string;
-  college: string;
-  year: string;
-  department: string;
-  teamSize: string;
-  experience?: string;
-  skills?: string;
-  motivation?: string;
-}
-
-export function sendRegistrationEmail(data: EmailPayload): void {
-  // Fire-and-forget async IIFE
-  (async () => {
-    try {
-      if (
-        !process.env.MAIL_USER ||
-        !process.env.MAIL_PASS ||
-        !process.env.RECIPIENT_EMAIL
-      ) {
-        throw new Error("Mail environment variables missing");
-      }
-
-      const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.MAIL_USER,
-          pass: process.env.MAIL_PASS,
-        },
-      });
-
-      transporter.sendMail({
-        from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
-        to: process.env.RECIPIENT_EMAIL,
-        subject: "Idea2Impact 2026 – Registration Successful 🚀",
-        html: `
+    // 3️⃣ Send Email
+    transporter.sendMail({
+      from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
+      to: process.env.RECIPIENT_EMAIL,
+      subject: "Idea2Impact 2026 – Registration Successful 🚀",
+      html: `
        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; border-radius: 12px;">
   <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
     
@@ -122,7 +78,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Name
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.name}
+            ${name}
           </td>
         </tr>
         
@@ -131,7 +87,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Email
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            <a href="mailto:${data.email}" style="color: #667eea; text-decoration: none;">${data.email}</a>
+            <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
           </td>
         </tr>
         
@@ -140,7 +96,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Phone
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.phone}
+            ${phone}
           </td>
         </tr>
         
@@ -156,7 +112,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> College
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.college}
+            ${college}
           </td>
         </tr>
         
@@ -165,7 +121,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Year
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.year}
+            ${year}
           </td>
         </tr>
         
@@ -174,7 +130,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Department
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.department}
+            ${department}
           </td>
         </tr>
         
@@ -190,7 +146,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Team Size
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.teamSize}
+            ${teamSize}
           </td>
         </tr>
         
@@ -199,7 +155,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Experience
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
         
@@ -208,7 +164,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Skills
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${data.skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
         
@@ -217,7 +173,7 @@ export function sendRegistrationEmail(data: EmailPayload): void {
             <span style="color: #667eea;">●</span> Motivation
           </td>
           <td style="padding: 18px 25px; color: #212529; line-height: 1.6;">
-            ${data.motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
       </tbody>
@@ -226,20 +182,30 @@ export function sendRegistrationEmail(data: EmailPayload): void {
     <!-- Footer -->
     <div style="background: #f8f9fa; padding: 20px 25px; text-align: center; border-top: 3px solid #667eea;">
       <p style="margin: 0; color: #6c757d; font-size: 13px;">
-        Received on ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+        Received on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
       </p>
     </div>
+    
   </div>
 </div>
       `,
-      });
+    });
 
-      console.log("✅ Registration email sent");
-    } catch (err) {
-      console.error(
-        "❌ Email send failed:",
-        err instanceof Error ? err.message : err,
-      );
-    }
-  })();
+    return NextResponse.json(
+      { success: true, id: registration._id },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("❌ Registration API Error:", error);
+    const errMessage =
+    error instanceof Error ? error.message : "Something went wrong";
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Registration failed",
+        error: errMessage,
+      },
+      { status: 500 }
+    );
+  }
 }
