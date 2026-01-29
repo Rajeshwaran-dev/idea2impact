@@ -48,7 +48,7 @@ console.log(process.env.MAIL_PASS,process.env.MAIL_USER,process.env.SMPT_HOST,"=
     });
 
     // 3️⃣ Send Email
-    transporter.sendMail({
+    await transporter.sendMail({
       from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",
