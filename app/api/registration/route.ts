@@ -36,19 +36,65 @@ export async function POST(req: Request) {
       motivation,
     });
 
-    // 2️⃣ SMTP Transport
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port:587,
-      secure: false, 
-      auth: {
-        user:process.env.MAIL_USER,
-        pass:process.env.MAIL_PASS,
-      },
-    });
+    sendRegistrationEmail(body)
+   
 
-    // 3️⃣ Send Email
-    transporter.sendMail({
+    return NextResponse.json(
+      { success: true, id: registration._id },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("❌ Registration API Error:", error);
+    const errMessage =
+    error instanceof Error ? error.message : "Something went wrong";
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Registration failed",
+        error: errMessage,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+
+interface EmailPayload {
+  name: string;
+  email: string;
+  phone: string;
+  college: string;
+  year: string;
+  department: string;
+  teamSize: string;
+  experience?: string;
+  skills?: string;
+  motivation?: string;
+}
+
+export function sendRegistrationEmail(data: EmailPayload): void {
+  // Fire-and-forget async IIFE
+  (async () => {
+    try {
+      if (
+        !process.env.MAIL_USER ||
+        !process.env.MAIL_PASS ||
+        !process.env.RECIPIENT_EMAIL
+      ) {
+        throw new Error("Mail environment variables missing");
+      }
+
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
+        },
+      });
+
+       transporter.sendMail({
       from: `"Idea2Impact" <${process.env.MAIL_USER}>`,
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",
@@ -57,7 +103,7 @@ export async function POST(req: Request) {
   <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
     
     <!-- Header -->
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
+    <div style="background: linear-gradient(135deg,#00e5ff 0%,#06f 100%); padding: 30px; text-align: center;">
       <h2 style="color: white; margin: 0; font-size: 28px; font-weight: 600; letter-spacing: 0.5px;">
         🎉 New Registration Received
       </h2>
@@ -78,7 +124,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Name
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${name}
+            ${data.name}
           </td>
         </tr>
         
@@ -87,7 +133,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Email
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
+            <a href="mailto:${data.email}" style="color: #667eea; text-decoration: none;">${data.email}</a>
           </td>
         </tr>
         
@@ -96,7 +142,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Phone
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${phone}
+            ${data.phone}
           </td>
         </tr>
         
@@ -112,7 +158,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> College
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${college}
+            ${data.college}
           </td>
         </tr>
         
@@ -121,7 +167,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Year
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${year}
+            ${data.year}
           </td>
         </tr>
         
@@ -130,7 +176,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Department
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${department}
+            ${data.department}
           </td>
         </tr>
         
@@ -146,7 +192,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Team Size
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${teamSize}
+            ${data.teamSize}
           </td>
         </tr>
         
@@ -155,7 +201,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Experience
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${data.experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
         
@@ -164,7 +210,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Skills
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${data.skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
         
@@ -173,7 +219,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Motivation
           </td>
           <td style="padding: 18px 25px; color: #212529; line-height: 1.6;">
-            ${motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+            ${data.motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
           </td>
         </tr>
       </tbody>
@@ -191,21 +237,13 @@ export async function POST(req: Request) {
       `,
     });
 
-    return NextResponse.json(
-      { success: true, id: registration._id },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("❌ Registration API Error:", error);
-    const errMessage =
-    error instanceof Error ? error.message : "Something went wrong";
-    return NextResponse.json(
-      {
-        success: false,
-        message: "Registration failed",
-        error: errMessage,
-      },
-      { status: 500 }
-    );
-  }
+      console.log("✅ Registration email sent");
+    } catch (err) {
+      console.error(
+        "❌ Email send failed:",
+        err instanceof Error ? err.message : err
+      );
+    }
+  })();
 }
+
