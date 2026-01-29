@@ -53,17 +53,141 @@ console.log(process.env.MAIL_PASS,process.env.MAIL_USER,process.env.SMPT_HOST,"=
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",
       html: `
-        <h2>New Registration Received</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>College:</b> ${college}</p>
-        <p><b>Year:</b> ${year}</p>
-        <p><b>Department:</b> ${department}</p>
-        <p><b>Team Size:</b> ${teamSize}</p>
-        <p><b>Experience:</b> ${experience || "N/A"}</p>
-        <p><b>Skills:</b> ${skills || "N/A"}</p>
-        <p><b>Motivation:</b> ${motivation || "N/A"}</p>
+       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; border-radius: 12px;">
+  <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+    
+    <!-- Header -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
+      <h2 style="color: white; margin: 0; font-size: 28px; font-weight: 600; letter-spacing: 0.5px;">
+        🎉 New Registration Received
+      </h2>
+    </div>
+    
+    <!-- Table Content -->
+    <table style="width: 100%; border-collapse: collapse; background: white;">
+      <tbody>
+        <!-- Personal Information Section -->
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+            👤 Personal Information
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; width: 40%; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Name
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${name}
+          </td>
+        </tr>
+        
+        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Email
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Phone
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${phone}
+          </td>
+        </tr>
+        
+        <!-- Academic Information Section -->
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+            🎓 Academic Information
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> College
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${college}
+          </td>
+        </tr>
+        
+        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Year
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${year}
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Department
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${department}
+          </td>
+        </tr>
+        
+        <!-- Team & Experience Section -->
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+            💼 Team & Experience
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Team Size
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${teamSize}
+          </td>
+        </tr>
+        
+        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Experience
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+          </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #e9ecef;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Skills
+          </td>
+          <td style="padding: 18px 25px; color: #212529;">
+            ${skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+          </td>
+        </tr>
+        
+        <tr style="background: #f8f9fa;">
+          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
+            <span style="color: #667eea;">●</span> Motivation
+          </td>
+          <td style="padding: 18px 25px; color: #212529; line-height: 1.6;">
+            ${motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Footer -->
+    <div style="background: #f8f9fa; padding: 20px 25px; text-align: center; border-top: 3px solid #667eea;">
+      <p style="margin: 0; color: #6c757d; font-size: 13px;">
+        Received on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+      </p>
+    </div>
+    
+  </div>
+</div>
       `,
     });
 
