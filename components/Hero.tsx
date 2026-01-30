@@ -25,7 +25,7 @@ const Hero = ({ onOpenModal }:HeroProps) => {
                         <span className="separator"> × </span>
                         <strong>GenieBox</strong>
                         <span className="separator"> × </span>
-                        <strong>Adhyamaan College of Engineering</strong>
+                        <strong>Adhiyamaan College of Engineering</strong>
                     </p>
 
                     <h2 className="hero-tagline">
@@ -359,7 +359,7 @@ const Hero = ({ onOpenModal }:HeroProps) => {
                             <div className="faq-answer">
                                 <p>
                                     {`Idea2Impact is a 24-hour hands-on hackathon organized by Askeva
-                                    Communications, GenieBox, and Adhyamaan College of Engineering.
+                                    Communications, GenieBox, and Adhiyamaan College of Engineering.
                                     It's designed to help students and tech enthusiasts transform
                                     their innovative ideas into working prototypes that solve
                                     real-world problems.`}
@@ -509,8 +509,7 @@ const Hero = ({ onOpenModal }:HeroProps) => {
                 <div className="footer-content">
                     <div className="footer-logo">Idea2Impact</div>
                     <p className="footer-organizers">
-                        A joint initiative by Askeva Communications, GenieBox, and Adhyamaan
-                        College of Engineering
+                        A joint initiative by Askeva Communications, GenieBox, and Adhiyamaan College of Engineering
                     </p>
                     <p className="footer-text">&copy; 2026 Idea2Impact. All rights reserved.</p>
                 </div>
