@@ -11,19 +11,8 @@ interface NavbarProps {
    Component
 ======================= */
 const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
-  const [scrolled, setScrolled] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = (): void => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`} id="navbar">
+    <nav className="navbar" id="navbar">
       <div className="nav-container">
         <div className="logo">Idea2Impact</div>
         <button className="nav-cta" onClick={onOpenModal}>

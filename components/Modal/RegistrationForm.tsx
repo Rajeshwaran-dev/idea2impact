@@ -141,11 +141,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     setIsSubmitting(true);
 
     try {
-      enqueueSnackbar("Submitting registration...", {
-        variant: "info",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-        autoHideDuration: 2000,
-      });
+      // enqueueSnackbar("Submitting registration...", {
+      //   variant: "info",
+      //   anchorOrigin: { vertical: "top", horizontal: "right" },
+      //   autoHideDuration: 2000,
+      // });
 
       const response = await fetch(`api/registration`,
         {
@@ -159,11 +159,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
         throw new Error("Failed to submit registration");
       }
 
-      enqueueSnackbar("Registration successful!", {
-        variant: "success",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-        autoHideDuration: 3000,
-      });
+      // enqueueSnackbar("Registration successful!", {
+      //   variant: "success",
+      //   anchorOrigin: { vertical: "top", horizontal: "right" },
+      //   autoHideDuration: 3000,
+      // });
 
       setIsSubmitted(true);
 

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 /* ==================== CSS VARIABLES ==================== */
 :root {
   --primary-dark: #0a0e27;
@@ -34,7 +34,6 @@
   --gray-900: #111827;
 
   --font-display: "Sora", sans-serif;
-  --font-body: "DM Sans", sans-serif;
 
   --section-padding: 120px;
   --container-width: 1280px;
@@ -59,7 +58,7 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   background: var(--gray-50);
   color: var(--gray-900);
   line-height: 1.6;
@@ -75,21 +74,12 @@ body {
 
 /* ==================== NAVIGATION ==================== */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--gray-200);
+  z-index: 10;
 }
 
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: var(--shadow-md);
-}
 
 .nav-container {
   max-width: var(--container-width);
@@ -138,7 +128,6 @@ body {
   align-items: center;
   background: var(--gradient-hero);
   overflow: hidden;
-  padding-top: 80px;
 }
 
 .hero::before {
@@ -596,7 +585,7 @@ body {
 }
 
 .modal-body {
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .form-group {
@@ -675,7 +664,7 @@ body {
 .success-message {
   display: none;
   text-align: center;
-  padding: 4rem 3rem;
+  padding: 2rem 1rem;
 }
 
 .success-message.active {
@@ -1233,7 +1222,7 @@ body {
 
   .modal-header,
   .modal-body {
-    padding: 2rem;
+    padding: 1.3rem;
   }
 
   .features-grid,
@@ -1333,9 +1322,39 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .form-label {
+    font-size: 12px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 12px;
+  }
+
+  .form-submit {
+    font-size: 14px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .modal-subtitle {
+    font-size: 10px;
+  }
+
   .section {
     padding: var(--section-padding) 1rem;
     position: relative;
+  }
+
+  .success-message h3 {
+    font-size: 1rem;
+  }
+
+  .success-message p {
+    font-size: 12px;
   }
 
   .timeline-item,
@@ -1405,7 +1424,7 @@ body {
 
 /* Individual snackbar styles */
 .notistack-MuiContent {
-  font-family: var(--font-body) !important;
+  font-family: var(--font-display) !important;
 }
 
 /* Success notification */
