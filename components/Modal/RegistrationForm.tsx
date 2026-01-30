@@ -15,6 +15,7 @@ interface FormData {
   name: string;
   email: string;
   phone: string;
+  countryCode: string;
   college: string;
   year: string;
   department: string;
@@ -37,6 +38,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
     name: "",
     email: "",
     phone: "",
+    countryCode: "+91",
     college: "",
     year: "",
     department: "",
@@ -76,6 +78,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
       newErrors.phone = "Phone number is required";
     } else if (!phoneRegex.test(phone)) {
       newErrors.phone = "Please enter a valid 10-digit mobile number";
+    }
+
+    if (!formData.countryCode) {
+      newErrors.countryCode = "Country code is required";
     }
 
     if (!formData.college.trim()) {
@@ -169,6 +175,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
             name: "",
             email: "",
             phone: "",
+            countryCode: "+91",
             college: "",
             year: "",
             department: "",
@@ -226,195 +233,216 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onClose }) => {
   }
 
   return (
-     <form id="registrationForm" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label className="form-label" htmlFor="name">
-                    Full Name <span>*</span>
-                </label>
-                <input
-                    className={getInputClassName('name')}
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter your full name"
-                />
-                {errors.name && <span className="error-message">{errors.name}</span>}
-            </div>
+    <form id="registrationForm" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label className="form-label" htmlFor="name">
+          Full Name <span>*</span>
+        </label>
+        <input
+          className={getInputClassName('name')}
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter your full name"
+        />
+        {errors.name && <span className="error-message">{errors.name}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="email">
-                    Email Address <span>*</span>
-                </label>
-                <input
-                    className={getInputClassName('email')}
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your.email@example.com"
-                />
-                {errors.email && <span className="error-message">{errors.email}</span>}
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="email">
+          Email Address <span>*</span>
+        </label>
+        <input
+          className={getInputClassName('email')}
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="your.email@example.com"
+        />
+        {errors.email && <span className="error-message">{errors.email}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="phone">
-                    Phone Number <span>*</span>
-                </label>
-                <input
-                    className={getInputClassName('phone')}
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="9876543210"
-                    maxLength={10}
-                />
-                {errors.phone && <span className="error-message">{errors.phone}</span>}
-                <small className="input-hint">Enter 10-digit mobile number</small>
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="phone">
+          Phone Number <span>*</span>
+        </label>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <select
+            className={getSelectClassName('countryCode')}
+            style={{ width: '100px' }}
+            id="countryCode"
+            name="countryCode"
+            value={formData.countryCode}
+            onChange={handleChange}
+          >
+            <option value="+91">+91 (IN)</option>
+            <option value="+1">+1 (US)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+971">+971 (UAE)</option>
+            <option value="+65">+65 (SG)</option>
+            <option value="+61">+61 (AU)</option>
+          </select>
+          <div style={{ flex: 1 }}>
+            <input
+              className={getInputClassName('phone')}
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="9876543210"
+              maxLength={10}
+            />
+          </div>
+        </div>
+        {(errors.phone || errors.countryCode) && (
+          <span className="error-message">{errors.phone || errors.countryCode}</span>
+        )}
+        <small className="input-hint">Select country code and enter 10-digit mobile number</small>
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="college">
-                    College/Institution <span>*</span>
-                </label>
-                <input
-                    className={getInputClassName('college')}
-                    type="text"
-                    id="college"
-                    name="college"
-                    value={formData.college}
-                    onChange={handleChange}
-                    placeholder="Your college name"
-                />
-                {errors.college && <span className="error-message">{errors.college}</span>}
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="college">
+          College/Institution <span>*</span>
+        </label>
+        <input
+          className={getInputClassName('college')}
+          type="text"
+          id="college"
+          name="college"
+          value={formData.college}
+          onChange={handleChange}
+          placeholder="Your college name"
+        />
+        {errors.college && <span className="error-message">{errors.college}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="year">
-                    Year of Study <span>*</span>
-                </label>
-                <select
-                    className={getSelectClassName('year')}
-                    id="year"
-                    name="year"
-                    value={formData.year}
-                    onChange={handleChange}
-                >
-                    <option value="">Select your year</option>
-                    <option value="1">1st Year</option>
-                    <option value="2">2nd Year</option>
-                    <option value="3">3rd Year</option>
-                    <option value="4">4th Year</option>
-                    <option value="graduate">Graduate</option>
-                    <option value="other">Other</option>
-                </select>
-                {errors.year && <span className="error-message">{errors.year}</span>}
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="year">
+          Year of Study <span>*</span>
+        </label>
+        <select
+          className={getSelectClassName('year')}
+          id="year"
+          name="year"
+          value={formData.year}
+          onChange={handleChange}
+        >
+          <option value="">Select your year</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+          <option value="graduate">Graduate</option>
+          <option value="other">Other</option>
+        </select>
+        {errors.year && <span className="error-message">{errors.year}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="department">
-                    Department/Stream <span>*</span>
-                </label>
-                <select
-                    className={getSelectClassName('department')}
-                    id="department"
-                    name="department"
-                    value={formData.department}
-                    onChange={handleChange}
-                >
-                    <option value="">Select your department</option>
-                    <option value="cse">Computer Science & Engineering</option>
-                    <option value="it">Information Technology</option>
-                    <option value="ece">Electronics & Communication</option>
-                    <option value="eee">Electrical & Electronics</option>
-                    <option value="mech">Mechanical Engineering</option>
-                    <option value="civil">Civil Engineering</option>
-                    <option value="aids">AI & Data Science</option>
-                    <option value="other">Other</option>
-                </select>
-                {errors.department && <span className="error-message">{errors.department}</span>}
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="department">
+          Department/Stream <span>*</span>
+        </label>
+        <select
+          className={getSelectClassName('department')}
+          id="department"
+          name="department"
+          value={formData.department}
+          onChange={handleChange}
+        >
+          <option value="">Select your department</option>
+          <option value="cse">Computer Science & Engineering</option>
+          <option value="it">Information Technology</option>
+          <option value="ece">Electronics & Communication</option>
+          <option value="eee">Electrical & Electronics</option>
+          <option value="mech">Mechanical Engineering</option>
+          <option value="civil">Civil Engineering</option>
+          <option value="aids">AI & Data Science</option>
+          <option value="other">Other</option>
+        </select>
+        {errors.department && <span className="error-message">{errors.department}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="team-size">
-                    Team Size <span>*</span>
-                </label>
-                <select
-                    className={getSelectClassName('teamSize')}
-                    id="team-size"
-                    name="teamSize"
-                    value={formData.teamSize}
-                    onChange={handleChange}
-                >
-                    <option value="">Select team size</option>
-                    <option value="1">Solo (1 member)</option>
-                    <option value="2">2 members</option>
-                    <option value="3">3 members</option>
-                    <option value="4">4 members</option>
-                </select>
-                {errors.teamSize && <span className="error-message">{errors.teamSize}</span>}
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="team-size">
+          Team Size <span>*</span>
+        </label>
+        <select
+          className={getSelectClassName('teamSize')}
+          id="team-size"
+          name="teamSize"
+          value={formData.teamSize}
+          onChange={handleChange}
+        >
+          <option value="">Select team size</option>
+          <option value="1">Solo (1 member)</option>
+          <option value="2">2 members</option>
+          <option value="3">3 members</option>
+          <option value="4">4 members</option>
+        </select>
+        {errors.teamSize && <span className="error-message">{errors.teamSize}</span>}
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="experience">
-                    Prior Hackathon Experience
-                </label>
-                <select
-                    className={getSelectClassName('experience')}
-                    id="experience"
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
-                >
-                    <option value="">Select experience level</option>
-                    <option value="none">No experience (First hackathon!)</option>
-                    <option value="beginner">1-2 hackathons</option>
-                    <option value="intermediate">3-5 hackathons</option>
-                    <option value="advanced">5+ hackathons</option>
-                </select>
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="experience">
+          Prior Hackathon Experience
+        </label>
+        <select
+          className={getSelectClassName('experience')}
+          id="experience"
+          name="experience"
+          value={formData.experience}
+          onChange={handleChange}
+        >
+          <option value="">Select experience level</option>
+          <option value="none">No experience (First hackathon!)</option>
+          <option value="beginner">1-2 hackathons</option>
+          <option value="intermediate">3-5 hackathons</option>
+          <option value="advanced">5+ hackathons</option>
+        </select>
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="skills">
-                    Technical Skills (Optional)
-                </label>
-                <input
-                    className={getInputClassName('skills')}
-                    type="text"
-                    id="skills"
-                    name="skills"
-                    value={formData.skills}
-                    onChange={handleChange}
-                    placeholder="e.g., Python, React, Machine Learning, etc."
-                />
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="skills">
+          Technical Skills (Optional)
+        </label>
+        <input
+          className={getInputClassName('skills')}
+          type="text"
+          id="skills"
+          name="skills"
+          value={formData.skills}
+          onChange={handleChange}
+          placeholder="e.g., Python, React, Machine Learning, etc."
+        />
+      </div>
 
-            <div className="form-group">
-                <label className="form-label" htmlFor="motivation">
-                    Why do you want to participate? (Optional)
-                </label>
-                <textarea
-                    className={getTextareaClassName('motivation')}
-                    id="motivation"
-                    name="motivation"
-                    value={formData.motivation}
-                    onChange={handleChange}
-                    placeholder="Tell us what excites you about Idea2Impact..."
-                />
-            </div>
+      <div className="form-group">
+        <label className="form-label" htmlFor="motivation">
+          Why do you want to participate? (Optional)
+        </label>
+        <textarea
+          className={getTextareaClassName('motivation')}
+          id="motivation"
+          name="motivation"
+          value={formData.motivation}
+          onChange={handleChange}
+          placeholder="Tell us what excites you about Idea2Impact..."
+        />
+      </div>
 
-            <button
-                type="submit"
-                className="form-submit"
-                disabled={isSubmitting}
-            >
-                {isSubmitting ? 'Submitting...' : 'Complete Registration'}
-            </button>
-        </form>
+      <button
+        type="submit"
+        className="form-submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Complete Registration'}
+      </button>
+    </form>
   );
 };
 

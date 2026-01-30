@@ -13,6 +13,7 @@ export async function POST(req: Request) {
       name,
       email,
       phone,
+      countryCode,
       college,
       year,
       department,
@@ -27,6 +28,7 @@ export async function POST(req: Request) {
       name,
       email,
       phone,
+      countryCode,
       college,
       year,
       department,
@@ -96,7 +98,7 @@ export async function POST(req: Request) {
             <span style="color: #667eea;">●</span> Phone
           </td>
           <td style="padding: 18px 25px; color: #212529;">
-            ${phone}
+            ${countryCode} ${phone}
           </td>
         </tr>
         

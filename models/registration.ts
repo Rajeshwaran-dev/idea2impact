@@ -18,6 +18,11 @@ const registrationSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        countryCode: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         college: {
             type: String,
             required: true,
