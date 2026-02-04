@@ -55,141 +55,164 @@ export async function POST(req: Request) {
       to: process.env.RECIPIENT_EMAIL,
       subject: "Idea2Impact 2026 – Registration Successful 🚀",
       html: `
-       <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; border-radius: 12px;">
-  <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+       <div style="max-width: 650px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
     
-    <!-- Header -->
-    <div style="background: linear-gradient(135deg,#00e5ff 0%,#06f 100%); padding: 30px; text-align: center;">
-      <h2 style="color: white; margin: 0; font-size: 28px; font-weight: 600; letter-spacing: 0.5px;">
-        🎉 New Registration Received
-      </h2>
+    <!-- Modern Header with Icon -->
+    <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); padding: 40px 30px; position: relative;">
+      <div style="text-align: center;">
+        <div style="display: inline-block; background: rgba(255,255,255,0.2); border-radius: 50%; padding: 15px; margin-bottom: 15px;">
+          <span style="font-size: 40px;">📋</span>
+        </div>
+        <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.5px;">
+          New Registration Received
+        </h1>
+        <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 14px;">
+          ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+        </p>
+      </div>
     </div>
-    
-    <!-- Table Content -->
-    <table style="width: 100%; border-collapse: collapse; background: white;">
-      <tbody>
-        <!-- Personal Information Section -->
-        <tr style="background: #f8f9fa;">
-          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+
+    <!-- Content Container -->
+    <div style="padding: 35px 30px;">
+      
+      <!-- Personal Information Card -->
+      <div style="margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; margin-bottom: 18px;">
+          <div style="width: 4px; height: 24px; background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%); border-radius: 2px; margin-right: 12px;"></div>
+          <h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #1f2937;">
             👤 Personal Information
-          </td>
-        </tr>
+          </h2>
+        </div>
         
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; width: 40%; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Name
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${name}
-          </td>
-        </tr>
-        
-        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Email
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            <a href="mailto:${email}" style="color: #667eea; text-decoration: none;">${email}</a>
-          </td>
-        </tr>
-        
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Phone
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${countryCode} ${phone}
-          </td>
-        </tr>
-        
-        <!-- Academic Information Section -->
-        <tr style="background: #f8f9fa;">
-          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+        <div style="background: #f9fafb; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; width: 35%; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Name</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; font-weight: 600; color: #111827;">${name}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Email</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <a href="mailto:${email}" style="font-size: 15px; color: #6366f1; text-decoration: none; font-weight: 500;">${email}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Phone</span>
+              </td>
+              <td style="padding: 12px 0;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${countryCode} ${phone}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Academic Information Card -->
+      <div style="margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; margin-bottom: 18px;">
+          <div style="width: 4px; height: 24px; background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%); border-radius: 2px; margin-right: 12px;"></div>
+          <h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #1f2937;">
             🎓 Academic Information
-          </td>
-        </tr>
+          </h2>
+        </div>
         
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> College
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${college}
-          </td>
-        </tr>
-        
-        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Year
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${year}
-          </td>
-        </tr>
-        
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Department
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${department}
-          </td>
-        </tr>
-        
-        <!-- Team & Experience Section -->
-        <tr style="background: #f8f9fa;">
-          <td colspan="2" style="padding: 15px 25px; font-weight: 600; color: #667eea; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #667eea;">
+        <div style="background: #f9fafb; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; width: 35%; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">College</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${college}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Year</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${year}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Department</span>
+              </td>
+              <td style="padding: 12px 0;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${department}</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Team & Experience Card -->
+      <div style="margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; margin-bottom: 18px;">
+          <div style="width: 4px; height: 24px; background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%); border-radius: 2px; margin-right: 12px;"></div>
+          <h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #1f2937;">
             💼 Team & Experience
-          </td>
-        </tr>
+          </h2>
+        </div>
         
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Team Size
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${teamSize}
-          </td>
-        </tr>
-        
-        <tr style="background: #f8f9fa; border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Experience
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${experience || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
-          </td>
-        </tr>
-        
-        <tr style="border-bottom: 1px solid #e9ecef;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Skills
-          </td>
-          <td style="padding: 18px 25px; color: #212529;">
-            ${skills || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
-          </td>
-        </tr>
-        
-        <tr style="background: #f8f9fa;">
-          <td style="padding: 18px 25px; font-weight: 600; color: #495057; vertical-align: top;">
-            <span style="color: #667eea;">●</span> Motivation
-          </td>
-          <td style="padding: 18px 25px; color: #212529; line-height: 1.6;">
-            ${motivation || "<span style='color: #6c757d; font-style: italic;'>Not provided</span>"}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
+        <div style="background: #f9fafb; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; width: 35%; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Team Size</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${teamSize}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Experience</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${experience || "<span style='color: #9ca3af; font-style: italic;'>Not provided</span>"}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Skills</span>
+              </td>
+              <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                <span style="font-size: 15px; color: #111827; font-weight: 500;">${skills || "<span style='color: #9ca3af; font-style: italic;'>Not provided</span>"}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; vertical-align: top;">
+                <span style="font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Motivation</span>
+              </td>
+              <td style="padding: 12px 0;">
+                <div style="font-size: 15px; color: #111827; line-height: 1.6; font-weight: 400;">${motivation || "<span style='color: #9ca3af; font-style: italic;'>Not provided</span>"}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Footer -->
-    <div style="background: #f8f9fa; padding: 20px 25px; text-align: center; border-top: 3px solid #667eea;">
-      <p style="margin: 0; color: #6c757d; font-size: 13px;">
-        Received on ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+    <div style="background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); padding: 25px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 13px; font-weight: 500;">
+        This is an automated notification from your registration system
+      </p>
+      <p style="margin: 0; color: #9ca3af; font-size: 12px;">
+        © ${new Date().getFullYear()} Idea2Impact. All rights reserved.
       </p>
     </div>
-    
+
   </div>
-</div>
       `,
     });
 

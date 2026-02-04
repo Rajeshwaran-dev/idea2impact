@@ -2,10 +2,10 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 
 interface HeroProps {
-  onOpenModal: () => void;
+    onOpenModal: () => void;
 }
 
-const Hero = ({ onOpenModal }:HeroProps) => {
+const Hero = ({ onOpenModal }: HeroProps) => {
     return (
         <>
             <section className="hero">
@@ -55,7 +55,7 @@ const Hero = ({ onOpenModal }:HeroProps) => {
                         <div className="section-badge">About Idea2Impact</div>
                         <h2 className="section-title">Transform Ideas into Reality</h2>
                         <p className="section-description">
-                           {` Idea2Impact is more than just a hackathon. It's a platform where
+                            {` Idea2Impact is more than just a hackathon. It's a platform where
                             innovation meets execution, where students transform their creative
                             concepts into working prototypes that solve real-world problems.`}
                         </p>
@@ -509,7 +509,8 @@ const Hero = ({ onOpenModal }:HeroProps) => {
                 <div className="footer-content">
                     <div className="footer-logo">Idea2Impact</div>
                     <p className="footer-organizers">
-                        A joint initiative by Askeva Communications, GenieBox, and Adhiyamaan College of Engineering
+                        A joint initiative by Askeva Communications, GenieBox, and Adhiyamaan
+                        College of Engineering
                     </p>
                     <p className="footer-text">&copy; 2026 Idea2Impact. All rights reserved.</p>
                 </div>
