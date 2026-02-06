@@ -84,21 +84,12 @@ body {
 .nav-container {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 1.25rem 2rem;
+  padding: 0.50rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logo {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
 .nav-cta {
   padding: 0.75rem 1.5rem;
@@ -126,8 +117,11 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--gradient-hero);
   overflow: hidden;
+  background-image: url('../public/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero::before {
@@ -137,29 +131,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background:
-    radial-gradient(circle at 20% 50%,
-      rgba(0, 229, 255, 0.15) 0%,
-      transparent 50%),
-    radial-gradient(circle at 80% 20%,
-      rgba(139, 92, 246, 0.15) 0%,
-      transparent 50%),
-    radial-gradient(circle at 40% 80%,
-      rgba(236, 72, 153, 0.15) 0%,
-      transparent 50%);
-  animation: heroGlow 15s ease-in-out infinite;
-}
-
-@keyframes heroGlow {
-
-  0%,
-  100% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
+  background: rgba(10, 14, 39, 0.85);
+  z-index: 1;
 }
 
 .hero-grid {
@@ -173,6 +146,7 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   opacity: 0.5;
+  z-index: 1;
 }
 
 .hero-container {
@@ -283,30 +257,6 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 1s ease-out 1s backwards;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ==================== BUTTONS ==================== */
@@ -716,10 +666,62 @@ body {
 }
 
 .section-dark {
-  background: var(--primary-dark);
-  color: var(--white);
+  position: relative;
+  background-color: var(--primary-dark);
+  overflow: hidden;
+  /* Add your background image here */
+  background-image: url('../public/hero-2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: creates parallax effect */
 }
 
+/* Dark overlay for readability */
+.section-dark::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 14, 39, 0.90); /* Adjust opacity as needed */
+  z-index: 1;
+}
+
+/* Optional: Add subtle pattern overlay */
+.section-dark::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+/* Ensure content is above overlays */
+.section-dark .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Light badge variant for dark sections */
+.section-badge-light {
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--accent-cyan);
+}
+
+/* Stats title for dark section */
+.section-dark .section-title {
+  color: var(--white);
+}
 .section-gradient {
   background: var(--gradient-primary);
   color: var(--white);
@@ -1018,7 +1020,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
 
 .stat-card {
@@ -1029,6 +1031,62 @@ body {
   border-radius: 24px;
   text-align: center;
   transition: all 0.4s ease;
+}
+
+.section-dark .stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.section-dark .stat-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-cyan);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+}
+
+/* Stat numbers with gradient */
+.stat-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--white) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+/* Stat labels */
+.stat-label {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-dark {
+    background-attachment: scroll; /* Better for mobile */
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1.5rem;
+  }
 }
 
 .stat-card:hover {
@@ -1211,8 +1269,7 @@ body {
   }
 
   .logo {
-    font-size: 1.1rem;
-    /* Further reduced logo size */
+    width: 100px;
   }
 
   .nav-cta {

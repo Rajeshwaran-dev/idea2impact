@@ -14,7 +14,9 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenModal }) => {
   return (
     <nav className="navbar" id="navbar">
       <div className="nav-container">
-        <div className="logo">Idea2Impact</div>
+        <div>
+          <img style={{ width: 90}} src="./logo.png" alt="logo" />
+        </div>
         <button className="nav-cta" onClick={onOpenModal}>
           Register Now
         </button>
