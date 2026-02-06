@@ -80,6 +80,9 @@ body {
   z-index: 10;
 }
 
+.header-logo {
+  width: 90px;
+}
 
 .nav-container {
   max-width: var(--container-width);
@@ -421,6 +424,14 @@ body {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
+
+  .header-logo {
+    width: 60px;
+  }
+
+  .hero {
+    padding-top: 60px;
+  }
 }
 
 /* ==================== FLOATING CTA BANNER (TO BE REMOVED) ==================== */
@@ -674,7 +685,8 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* Optional: creates parallax effect */
+  background-attachment: fixed;
+  /* Optional: creates parallax effect */
 }
 
 /* Dark overlay for readability */
@@ -685,7 +697,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(10, 14, 39, 0.90); /* Adjust opacity as needed */
+  background: rgba(10, 14, 39, 0.90);
+  /* Adjust opacity as needed */
   z-index: 1;
 }
 
@@ -722,6 +735,7 @@ body {
 .section-dark .section-title {
   color: var(--white);
 }
+
 .section-gradient {
   background: var(--gradient-primary);
   color: var(--white);
@@ -1069,9 +1083,10 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .section-dark {
-    background-attachment: scroll; /* Better for mobile */
+    background-attachment: scroll;
+    /* Better for mobile */
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
@@ -1083,7 +1098,7 @@ body {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .stat-card {
     padding: 1.5rem;
   }
