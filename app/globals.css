@@ -1283,6 +1283,10 @@ body {
     /* Reduced horizontal padding */
   }
 
+  .footer {
+  padding: 4rem 2rem 10rem;
+}
+
   .logo {
     width: 100px;
   }
